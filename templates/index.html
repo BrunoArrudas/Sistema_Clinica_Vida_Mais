@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pacientes</title>
+</head>
+<body>
+    <h1>Lista de Pacientes</h1>
+    <a href="/cadastrar">Cadastrar novo paciente</a>
+    <ul>
+        {% for paciente in pacientes %}
+            <li>{{ paciente.nome }} - {{ paciente.idade }} anos - {{ paciente.telefone }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
