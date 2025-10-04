@@ -5,13 +5,14 @@
 </head>
 <body>
     <h1>Lista de Pacientes</h1>
-    <a href="cadastrar.html">Cadastrar novo paciente</a>
+    <!-- Link para página de cadastro usando url_for do Flask -->
+    <a href="{{ url_for('cadastrar') }}">Cadastrar novo paciente</a>
     <ul>
         {% for paciente in pacientes %}
             <li>
                 {{ paciente.nome }} - {{ paciente.idade }} anos - {{ paciente.telefone }}
-                | <a href="editar.html">Editar</a>
-                | <a href="/excluir/{{ paciente.id }}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                | <a href="{{ url_for('editar', id=paciente.id) }}">Editar</a>
+                | <a href="{{ url_for('excluir', id=paciente.id) }}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
             </li>
         {% endfor %}
     </ul>
