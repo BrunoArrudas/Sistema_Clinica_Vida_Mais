@@ -8,7 +8,11 @@
     <a href="/cadastrar">Cadastrar novo paciente</a>
     <ul>
         {% for paciente in pacientes %}
-            <li>{{ paciente.nome }} - {{ paciente.idade }} anos - {{ paciente.telefone }}</li>
+            <li>
+                {{ paciente.nome }} - {{ paciente.idade }} anos - {{ paciente.telefone }}
+                | <a href="/editar/{{ paciente.id }}">Editar</a>
+                | <a href="/excluir/{{ paciente.id }}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+            </li>
         {% endfor %}
     </ul>
 </body>

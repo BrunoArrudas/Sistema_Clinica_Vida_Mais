@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Paciente</title>
+</head>
+<body>
+    <h1>Editar Paciente</h1>
+    <form method="POST">
+        Nome: <input type="text" name="nome" value="{{ paciente.nome }}" required><br><br>
+        Idade: <input type="number" name="idade" value="{{ paciente.idade }}" required><br><br>
+        Telefone: <input type="text" name="telefone" value="{{ paciente.telefone }}" required><br><br>
+        <button type="submit">Salvar Alterações</button>
+    </form>
+    <br>
+    <a href="/">Voltar</a>
+</body>
+</html>

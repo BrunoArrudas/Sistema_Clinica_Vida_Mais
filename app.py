@@ -37,6 +37,27 @@ def cadastrar():
 
     return render_template('cadastrar.html')
 
+# Rota de edição
+@app.route('/editar/<int:id>', methods=['GET', 'POST'])
+def editar(id):
+    paciente = Paciente.query.get_or_404(id)
+    if request.method == 'POST':
+        paciente.nome = request.form['nome']
+        paciente.idade = request.form['idade']
+        paciente.telefone = request.form['telefone']
+        db.session.commit()
+        return redirect(url_for('index'))
+
+    return render_template('editar.html', paciente=paciente)
+
+# Rota de exclusão
+@app.route('/excluir/<int:id>')
+def excluir(id):
+    paciente = Paciente.query.get_or_404(id)
+    db.session.delete(paciente)
+    db.session.commit()
+    return redirect(url_for('index'))
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Cria as tabelas no banco
