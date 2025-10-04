@@ -1,0 +1,151 @@
+/* ===== Corpo da página ===== */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f8fa;
+    margin: 0;
+    padding: 20px;
+}
+
+/* ===== Cards genéricos ===== */
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 20px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+/* Hover para todos os cards */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* ===== Lista de pacientes ===== */
+.pacientes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+.paciente-card {
+    width: 250px;
+}
+
+/* Conteúdo dos cards de pacientes */
+.paciente-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.paciente-card p {
+    margin: 5px 0;
+}
+
+/* Links de ação */
+.acoes {
+    margin-top: 10px;
+}
+
+.acoes a {
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+}
+
+.acoes a.editar {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.acoes a.editar:hover {
+    background-color: #45a049;
+}
+
+.acoes a.excluir {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.acoes a.excluir:hover {
+    background-color: #d32f2f;
+}
+
+/* ===== Página de cadastro ===== */
+.cadastrar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+.cadastrar-card {
+    width: 100%;
+    max-width: 400px;
+}
+
+.cadastrar-card h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Inputs e labels do formulário */
+.cadastrar-card label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.cadastrar-card input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border 0.3s ease;
+}
+
+.cadastrar-card input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Botão salvar */
+.cadastrar-card button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cadastrar-card button:hover {
+    background-color: #45a049;
+}
+
+/* Link voltar */
+.cadastrar-card .voltar {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    text-decoration: none;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+.cadastrar-card .voltar:hover {
+    color: #000;
+}

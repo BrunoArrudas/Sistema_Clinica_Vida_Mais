@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pacientes</title>
+    <title>Pagina Inicial</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Lista de Pacientes</h1>
+    <h1 id="x1">Pacientes do Sistema Clínica Vida+</h1>
     <!-- Link para página de cadastro usando url_for do Flask -->
     <a href="{{ url_for('cadastrar') }}">Cadastrar novo paciente</a>
-    <ul>
-        {% for paciente in pacientes %}
-            <li>
-                {{ paciente.nome }} - {{ paciente.idade }} anos - {{ paciente.telefone }}
-                | <a href="{{ url_for('editar', id=paciente.id) }}">Editar</a>
-                | <a href="{{ url_for('excluir', id=paciente.id) }}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
-            </li>
-        {% endfor %}
-    </ul>
+
+<div class="pacientes-container">
+    {% for paciente in pacientes %}
+        <div class="card paciente-card">
+            <h3>{{ paciente.nome }}</h3>
+            <p><strong>Idade:</strong> {{ paciente.idade }} anos</p>
+            <p><strong>Telefone:</strong> {{ paciente.telefone }}</p>
+            <div class="acoes">
+                <a href="{{ url_for('editar', id=paciente.id) }}" class="editar">Editar</a>
+                <a href="{{ url_for('excluir', id=paciente.id) }}" class="excluir" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
 </body>
 </html>
