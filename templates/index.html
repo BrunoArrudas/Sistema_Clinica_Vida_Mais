@@ -5,12 +5,12 @@
 </head>
 <body>
     <h1>Lista de Pacientes</h1>
-    <a href="/cadastrar">Cadastrar novo paciente</a>
+    <a href="cadastrar.html">Cadastrar novo paciente</a>
     <ul>
         {% for paciente in pacientes %}
             <li>
                 {{ paciente.nome }} - {{ paciente.idade }} anos - {{ paciente.telefone }}
-                | <a href="/editar/{{ paciente.id }}">Editar</a>
+                | <a href="editar.html">Editar</a>
                 | <a href="/excluir/{{ paciente.id }}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
             </li>
         {% endfor %}
