@@ -50,6 +50,17 @@ def editar(id):
 
     return render_template('editar.html', paciente=paciente)
 
+@app.route('/cadastrar_medico', methods=['GET', 'POST'])
+def cadastrar_medico():
+    if request.method == 'POST':
+        nome = request.form['nome']
+        especialidade = request.form['especialidade']
+        crm = request.form['crm']
+        telefone = request.form['telefone']
+        # Aqui você pode salvar no banco
+        return redirect(url_for('index'))
+    return render_template('cadastrar_medico.html')
+
 # Rota de exclusão
 @app.route('/excluir/<int:id>')
 def excluir(id):
@@ -62,3 +73,5 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Cria as tabelas no banco
     app.run(debug=True)
+
+    

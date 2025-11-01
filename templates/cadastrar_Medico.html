@@ -1,0 +1,23 @@
+<body>
+    <div class="cadastrar-container">
+        <div class="card cadastrar-card">
+            <h1>Cadastrar Médico</h1>
+            <form method="POST">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="especialidade">Especialidade:</label>
+                <input type="text" id="especialidade" name="especialidade" required>
+
+                <label for="crm">CRM:</label>
+                <input type="text" id="crm" name="crm" required>
+
+                <label for="telefone">Telefone:</label>
+                <input type="text" id="telefone" name="telefone" required>
+
+                <button type="submit">Salvar</button>
+            </form>
+            <a href="{{ url_for('index') }}" class="voltar">Voltar à lista</a>
+        </div>
+    </div>
+</body>
