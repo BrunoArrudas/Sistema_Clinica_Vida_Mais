@@ -2,21 +2,22 @@
 {% block content %}
 
 <h1>Médicos Cadastrados</h1>
-<a href="{{ url_for('cadastrar_medico') }}" class="btn" style="margin-bottom:20px;">Cadastrar novo médico</a>
 
 <div class="cards-container">
     {% for medico in medicos %}
-    <div class="card">
+    <div class="card paciente-card">
         <h3>{{ medico.nome }}</h3>
         <p><strong>Especialidade:</strong> {{ medico.especialidade }}</p>
         <p><strong>CRM:</strong> {{ medico.crm }}</p>
         <p><strong>Telefone:</strong> {{ medico.telefone }}</p>
         <div class="acoes">
-            <a href="{{ url_for('excluir_medico', id=medico.id) }}"
+            <a href="{{ url_for('excluir_medico', id=medico.id) }}" class="btn btn-voltar"
                onclick="return confirm('Tem certeza que deseja excluir este médico?')">Excluir</a>
         </div>
     </div>
     {% endfor %}
 </div>
+
+<a href="{{ url_for('cadastrar_medico') }}" class="btn">Cadastrar novo médico</a>
 
 {% endblock %}

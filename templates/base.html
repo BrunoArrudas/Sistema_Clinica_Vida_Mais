@@ -4,86 +4,6 @@
     <meta charset="UTF-8">
     <title>Clínica Vida+</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <style>
-        /* ======== MENU (NAVBAR) ======== */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #0077b6;
-            padding: 15px 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            transition: transform 0.2s, color 0.2s;
-        }
-
-        nav a:hover {
-            color: #90e0ef;
-            transform: translateY(-3px);
-        }
-
-        nav .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        /* ======== FOOTER ======== */
-        footer {
-            background-color: #0077b6;
-            color: white;
-            text-align: center;
-            padding: 15px 30px;
-            border-radius: 10px;
-            box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
-            margin-top: 40px;
-        }
-
-        footer a {
-            color: #90e0ef;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* ======== ESTILO GERAL ======== */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        /* ======== BOTÕES ======== */
-        .btn {
-            display: inline-block;
-            padding: 8px 15px;
-            background-color: #00b4d8;
-            color: white;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: transform 0.2s, background-color 0.2s;
-        }
-
-        .btn:hover {
-            background-color: #0096c7;
-            transform: translateY(-3px);
-        }
-    </style>
 </head>
 <body>
 
@@ -92,7 +12,7 @@
         <div class="logo">Clínica Vida+</div>
         <div class="menu-links">
             <a href="{{ url_for('index') }}">Pacientes</a>
-            <a href="{{ url_for('cadastrar_Medico') }}">Médicos</a>
+            <a href="{{ url_for('lista_medicos') }}">Médicos</a>
             <a href="{{ url_for('agendamentos') }}">Agendamentos</a>
             <a href="{{ url_for('atendimentos') }}">Atendimentos</a>
         </div>

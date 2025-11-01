@@ -1,39 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1 id="x1" style="margin-bottom:20px;">Pacientes do Sistema Clínica Vida+</h1>
+<h1 style="margin-bottom:20px;">Pacientes do Sistema Clínica Vida+</h1>
 
-<!-- Estatísticas dos pacientes -->
-<div class="estatisticas" style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:30px;">
-    <div class="estat-card" style="flex:1; background-color:#0077b6; color:white; padding:20px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s;">
-        <div style="font-size:1.2rem; margin-bottom:10px;"><strong>Total de pacientes</strong></div>
+<!-- Estatísticas -->
+<div class="estatisticas">
+    <div class="card estat-card" style="background-color:#0077b6; color:white;">
+        <strong>Total de pacientes</strong>
         <div style="font-size:2rem;">{{ total_pacientes }}</div>
     </div>
-    <div class="estat-card" style="flex:1; background-color:#0096c7; color:white; padding:20px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s;">
-        <div style="font-size:1.2rem; margin-bottom:10px;"><strong>Idade média</strong></div>
+    <div class="card estat-card" style="background-color:#0096c7; color:white;">
+        <strong>Idade média</strong>
         <div style="font-size:2rem;">{{ idade_media or '-' }} anos</div>
     </div>
-    <div class="estat-card" style="flex:1; background-color:#00b4d8; color:white; padding:20px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s;">
-        <div style="font-size:1.2rem; margin-bottom:10px;"><strong>Mais novo</strong></div>
-        <div style="font-size:1.5rem;">{{ paciente_mais_novo.nome }} — {{ paciente_mais_novo.idade }} anos</div>
+    <div class="card estat-card" style="background-color:#00b4d8; color:white;">
+        <strong>Mais novo</strong>
+        <div>{{ paciente_mais_novo.nome }} — {{ paciente_mais_novo.idade }} anos</div>
     </div>
-    <div class="estat-card" style="flex:1; background-color:#48cae4; color:white; padding:20px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s;">
-        <div style="font-size:1.2rem; margin-bottom:10px;"><strong>Mais velho</strong></div>
-        <div style="font-size:1.5rem;">{{ paciente_mais_velho.nome }} — {{ paciente_mais_velho.idade }} anos</div>
+    <div class="card estat-card" style="background-color:#48cae4; color:white;">
+        <strong>Mais velho</strong>
+        <div>{{ paciente_mais_velho.nome }} — {{ paciente_mais_velho.idade }} anos</div>
     </div>
 </div>
 
 <!-- Botão de cadastro -->
-<a href="{{ url_for('cadastrar') }}" class="btn" style="margin-bottom:20px; display:inline-block;">Cadastrar novo paciente</a>
+<a href="{{ url_for('cadastrar') }}" class="btn">Cadastrar novo paciente</a>
 
-<!-- Lista de pacientes em cards -->
-<div class="pacientes-container" style="display:flex; flex-wrap:wrap; gap:20px; margin-top:20px;">
+<!-- Lista de pacientes -->
+<div class="pacientes-container">
     {% for paciente in pacientes %}
-    <div class="card paciente-card" style="flex:1 1 250px; padding:20px; border-radius:10px; background-color:white; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s;">
+    <div class="card paciente-card">
         <h3>{{ paciente.nome }}</h3>
         <p><strong>Idade:</strong> {{ paciente.idade }} anos</p>
         <p><strong>Telefone:</strong> {{ paciente.telefone }}</p>
-        <div class="acoes" style="margin-top:10px;">
+        <div class="acoes">
             <a href="{{ url_for('editar', id=paciente.id) }}" class="btn">Editar</a>
             <a href="{{ url_for('excluir', id=paciente.id) }}" class="btn btn-voltar"
                onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
@@ -41,17 +41,5 @@
     </div>
     {% endfor %}
 </div>
-
-<!-- Hover animation para os cards -->
-<style>
-.estat-card:hover {
-    transform: translateY(-5px);
-}
-
-.paciente-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-</style>
 
 {% endblock %}

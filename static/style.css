@@ -1,3 +1,6 @@
+/* =======================
+   ESTILO GLOBAL
+======================= */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f4f8;
@@ -10,7 +13,64 @@ body {
     margin: auto;
 }
 
-/* Cards */
+/* =======================
+   MENU / NAVBAR
+======================= */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0077b6;
+    padding: 15px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+nav .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    transition: transform 0.2s, color 0.2s;
+}
+
+nav a:hover {
+    color: #90e0ef;
+    transform: translateY(-3px);
+}
+
+/* =======================
+   RODAPÉ
+======================= */
+footer {
+    background-color: #0077b6;
+    color: white;
+    text-align: center;
+    padding: 15px 30px;
+    border-radius: 10px;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+    margin-top: 40px;
+}
+
+footer a {
+    color: #90e0ef;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* =======================
+   CARDS
+======================= */
 .card {
     background-color: white;
     border-radius: 10px;
@@ -24,17 +84,50 @@ body {
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
-/* Container para listas de cards */
 .cards-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
 
-/* Botões dentro dos cards */
+/* Cards de estatísticas */
+.estat-card {
+    flex: 1;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.estat-card:hover {
+    transform: translateY(-5px);
+}
+
+/* =======================
+   BOTÕES
+======================= */
+.btn {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #00b4d8;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: #0096c7;
+    transform: translateY(-2px);
+}
+
+/* Botões dentro de cards (ações) */
 .card .acoes a {
     text-decoration: none;
     padding: 6px 12px;
@@ -51,18 +144,72 @@ body {
     transform: translateY(-2px);
 }
 
-/* Botões gerais */
-.btn {
-    padding: 8px 15px;
-    background-color: #00b4d8;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: transform 0.2s, background-color 0.2s;
+/* Botão voltar dentro de formulários */
+.btn-voltar {
+    background-color: #48cae4;
 }
 
-.btn:hover {
+.btn-voltar:hover {
     background-color: #0096c7;
-    transform: translateY(-2px);
+}
+
+/* =======================
+   FORMULÁRIOS
+======================= */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* =======================
+   CONTAINERS ESPECÍFICOS
+======================= */
+.cadastrar-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.cadastrar-card {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Lista de pacientes e médicos */
+.pacientes-container,
+.cards-container,
+.historico-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Cards de histórico */
+.historico-card .descricao {
+    white-space: pre-wrap;
+}
+
+/* Hover suave para todos os cards */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }

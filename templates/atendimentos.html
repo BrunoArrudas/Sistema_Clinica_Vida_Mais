@@ -1,55 +1,48 @@
-<body>
+{% extends "base.html" %}
+{% block content %}
 
-    {% extends "base.html" %}
-    {% block content %}
-    <div class="cadastrar-container">
-        <div class="card cadastrar-card">
-            <h1>Registro de Atendimento</h1>
+<div class="cadastrar-container">
+    <div class="card cadastrar-card">
+        <h1>Registro de Atendimento</h1>
+        <form method="POST">
+            <label for="paciente">Paciente:</label>
+            <select id="paciente" name="paciente" required>
+                <option value="" disabled selected>Selecione o paciente</option>
+                {% for paciente in pacientes %}
+                <option value="{{ paciente.id }}">{{ paciente.nome }}</option>
+                {% endfor %}
+            </select>
 
-            <!-- Formulário de novo atendimento -->
-            <form method="POST">
-                <label for="paciente">Paciente:</label>
-                <select id="paciente" name="paciente" required>
-                    <option value="" disabled selected>Selecione o paciente</option>
-                    {% for paciente in pacientes %}
-                    <option value="{{ paciente.id }}">{{ paciente.nome }}</option>
-                    {% endfor %}
-                </select>
+            <label for="tipo">Tipo de atendimento:</label>
+            <select id="tipo" name="tipo" required>
+                <option value="Consulta">Consulta</option>
+                <option value="Exame">Exame</option>
+                <option value="Retorno">Retorno</option>
+            </select>
 
-                <label for="tipo">Tipo de atendimento:</label>
-                <select id="tipo" name="tipo" required>
-                    <option value="Consulta">Consulta</option>
-                    <option value="Exame">Exame</option>
-                    <option value="Retorno">Retorno</option>
-                </select>
+            <label for="descricao">Descrição / Evolução:</label>
+            <textarea id="descricao" name="descricao" rows="5" placeholder="Descreva o atendimento..." required></textarea>
 
-                <label for="descricao">Descrição / Evolução:</label>
-                <textarea id="descricao" name="descricao" rows="5"
-                    placeholder="Descreva o atendimento, sintomas, diagnóstico, conduta..." required></textarea>
-
-                <button type="submit">Salvar Atendimento</button>
-            </form>
-
-            <a href="{{ url_for('index') }}" class="voltar">Voltar à página inicial</a>
-        </div>
+            <button type="submit" class="btn">Salvar Atendimento</button>
+        </form>
+        <a href="{{ url_for('index') }}" class="btn btn-voltar">Voltar à página inicial</a>
     </div>
+</div>
 
-    <div class="historico-container">
-        <h2>Histórico de Atendimentos</h2>
-        {% if atendimentos %}
-        {% for atendimento in atendimentos %}
-        <div class="card historico-card">
-            <h3>{{ atendimento.paciente.nome }}</h3>
-            <p><strong>Tipo:</strong> {{ atendimento.tipo }}</p>
-            <p><strong>Data:</strong> {{ atendimento.data.strftime('%d/%m/%Y') }}</p>
-            <p><strong>Evolução:</strong></p>
-            <p class="descricao">{{ atendimento.descricao }}</p>
-        </div>
-        {% endfor %}
-        {% else %}
-        <p>Nenhum atendimento registrado ainda.</p>
-        {% endif %}
+<div class="historico-container">
+    <h2>Histórico de Atendimentos</h2>
+    {% if atendimentos %}
+    {% for atendimento in atendimentos %}
+    <div class="card historico-card">
+        <h3>{{ atendimento.paciente.nome }}</h3>
+        <p><strong>Tipo:</strong> {{ atendimento.tipo }}</p>
+        <p><strong>Data:</strong> {{ atendimento.data.strftime('%d/%m/%Y') }}</p>
+        <p><strong>Evolução:</strong> {{ atendimento.descricao }}</p>
     </div>
+    {% endfor %}
+    {% else %}
+    <p>Nenhum atendimento registrado ainda.</p>
+    {% endif %}
+</div>
 
-    {% endblock %}
-</body>
+{% endblock %}

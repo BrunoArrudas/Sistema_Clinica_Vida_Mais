@@ -1,37 +1,23 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+{% block content %}
 
-<head>
-    <title>Editar Paciente</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+<div class="cadastrar-container">
+    <div class="card cadastrar-card">
+        <h1>Editar Paciente</h1>
+        <form method="POST">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" value="{{ paciente.nome }}" required>
 
+            <label for="idade">Idade:</label>
+            <input type="number" id="idade" name="idade" value="{{ paciente.idade }}" required>
 
-<body>
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" name="telefone" value="{{ paciente.telefone }}" required>
 
-    {% extends "base.html" %}
-    {% block content %}
-    <div class="cadastrar-container">
-        <div class="card cadastrar-card">
-            <h1>Editar Paciente</h1>
-            <form method="POST">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" value="{{ paciente.nome }}" required>
-
-                <label for="idade">Idade:</label>
-                <input type="number" id="idade" name="idade" value="{{ paciente.idade }}" required>
-
-                <label for="telefone">Telefone:</label>
-                <input type="text" id="telefone" name="telefone" value="{{ paciente.telefone }}" required>
-
-                <button type="submit">Salvar Alterações</button>
-            </form>
-            <a href="{{ url_for('index') }}" class="voltar">Voltar à lista</a>
-        </div>
+            <button type="submit" class="btn">Salvar Alterações</button>
+        </form>
+        <a href="{{ url_for('index') }}" class="btn btn-voltar">Voltar à lista</a>
     </div>
+</div>
 
-    {% endblock %}
-</body>
-
-
-</html>
+{% endblock %}

@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Cadastrar Paciente</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
 {% extends "base.html" %}
 {% block content %}
+
 <div class="cadastrar-container">
     <div class="card cadastrar-card">
         <h1>Cadastrar Paciente</h1>
@@ -20,11 +14,10 @@
             <label for="telefone">Telefone:</label>
             <input type="text" id="telefone" name="telefone" required>
 
-            <button type="submit">Salvar</button>
+            <button type="submit" class="btn">Salvar</button>
         </form>
-        <a href="{{ url_for('index') }}" class="voltar">Voltar à lista</a>
+        <a href="{{ url_for('index') }}" class="btn btn-voltar">Voltar à lista</a>
     </div>
 </div>
-{% endblock %}
 
-</html>
+{% endblock %}

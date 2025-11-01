@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from sqlalchemy import func
 
 app = Flask(__name__)
 
@@ -48,14 +49,12 @@ class Atendimento(db.Model):
 # 📍 ROTAS PRINCIPAIS
 # =====================
 
-from sqlalchemy import func
-
 @app.route('/')
 def index():
     pacientes = Paciente.query.all()
 
     # Estatísticas
-    total_pacientes = db.session.query(func.count(Paciente.id)).scalar()
+    total_pacientes = db.session.query(func.count(Paciente.id)).scalar() or 0
     idade_media = db.session.query(func.avg(Paciente.idade)).scalar()
     if idade_media:
         idade_media = round(idade_media, 1)
@@ -95,7 +94,6 @@ def editar(id):
         paciente.telefone = request.form['telefone']
         db.session.commit()
         return redirect(url_for('index'))
-
     return render_template('editar.html', paciente=paciente)
 
 @app.route('/excluir/<int:id>')
@@ -120,8 +118,8 @@ def cadastrar_medico():
         novo_medico = Medico(nome=nome, especialidade=especialidade, crm=crm, telefone=telefone)
         db.session.add(novo_medico)
         db.session.commit()
-
         return redirect(url_for('lista_medicos'))
+
     return render_template('cadastrar_medico.html')
 
 @app.route('/medicos')
@@ -149,10 +147,9 @@ def agendar():
         paciente_id = request.form['paciente']
         medico_id = request.form['medico']
         tipo = request.form['tipo']
-        data_str = request.form['data']  # ex: '2025-11-27'
+        data_str = request.form['data']
         hora = request.form['hora']
 
-        # Converter string para objeto date
         data_obj = datetime.strptime(data_str, '%Y-%m-%d').date()
 
         novo_agendamento = Agendamento(
@@ -170,7 +167,7 @@ def agendar():
 
 @app.route('/agendamentos')
 def agendamentos():
-    agendamentos = Agendamento.query.all()
+    agendamentos = Agendamento.query.order_by(Agendamento.data.desc()).all()
     return render_template('agendamentos.html', agendamentos=agendamentos)
 
 # =====================

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+
 <h2>Agendar Consulta / Exame</h2>
 <form method="POST">
     <label>Paciente:</label>
@@ -7,28 +8,29 @@
         {% for paciente in pacientes %}
             <option value="{{ paciente.id }}">{{ paciente.nome }}</option>
         {% endfor %}
-    </select><br><br>
+    </select>
 
     <label>Médico:</label>
     <select name="medico" required>
         {% for medico in medicos %}
             <option value="{{ medico.id }}">{{ medico.nome }}</option>
         {% endfor %}
-    </select><br><br>
+    </select>
 
     <label>Tipo:</label>
     <select name="tipo" required>
         <option value="Consulta">Consulta</option>
         <option value="Exame">Exame</option>
-    </select><br><br>
+    </select>
 
     <label>Data:</label>
-    <input type="date" name="data" required><br><br>
+    <input type="date" name="data" required>
 
     <label>Hora:</label>
-    <input type="time" name="hora" required><br><br>
+    <input type="time" name="hora" required>
 
     <button type="submit" class="btn">Salvar Agendamento</button>
     <a href="{{ url_for('index') }}" class="btn btn-voltar">Voltar</a>
 </form>
+
 {% endblock %}
