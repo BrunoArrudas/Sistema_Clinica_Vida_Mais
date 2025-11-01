@@ -1,54 +1,34 @@
-<body>
-    <div class="cadastrar-container">
-        <div class="card cadastrar-card">
-            <h1>Agendar Consulta ou Exame</h1>
-            <form method="POST">
-                <!-- Seleção de paciente -->
-                <label for="paciente">Paciente:</label>
-                <select id="paciente" name="paciente" required>
-                    <option value="" disabled selected>Selecione o paciente</option>
-                    {% for paciente in pacientes %}
-                        <option value="{{ paciente.id }}">{{ paciente.nome }}</option>
-                    {% endfor %}
-                </select>
+{% extends "base.html" %}
+{% block content %}
+<h2>Agendar Consulta / Exame</h2>
+<form method="POST">
+    <label>Paciente:</label>
+    <select name="paciente" required>
+        {% for paciente in pacientes %}
+            <option value="{{ paciente.id }}">{{ paciente.nome }}</option>
+        {% endfor %}
+    </select><br><br>
 
-                <!-- Seleção de médico -->
-                <label for="medico">Médico:</label>
-                <select id="medico" name="medico" required>
-                    <option value="" disabled selected>Selecione o médico</option>
-                    {% for medico in medicos %}
-                        <option value="{{ medico.id }}">{{ medico.nome }} - {{ medico.especialidade }}</option>
-                    {% endfor %}
-                </select>
+    <label>Médico:</label>
+    <select name="medico" required>
+        {% for medico in medicos %}
+            <option value="{{ medico.id }}">{{ medico.nome }}</option>
+        {% endfor %}
+    </select><br><br>
 
-                <!-- Tipo de atendimento -->
-                <label for="tipo">Tipo de atendimento:</label>
-                <select id="tipo" name="tipo" required>
-                    <option value="Consulta">Consulta</option>
-                    <option value="Exame">Exame</option>
-                </select>
+    <label>Tipo:</label>
+    <select name="tipo" required>
+        <option value="Consulta">Consulta</option>
+        <option value="Exame">Exame</option>
+    </select><br><br>
 
-                <!-- Data e horário -->
-                <label for="data">Data:</label>
-                <input type="date" id="data" name="data" required>
+    <label>Data:</label>
+    <input type="date" name="data" required><br><br>
 
-                <label for="hora">Horário:</label>
-                <select id="hora" name="hora" required>
-                    <option value="" disabled selected>Selecione o horário</option>
-                    <option value="08:00">08:00</option>
-                    <option value="09:00">09:00</option>
-                    <option value="10:00">10:00</option>
-                    <option value="11:00">11:00</option>
-                    <option value="13:00">13:00</option>
-                    <option value="14:00">14:00</option>
-                    <option value="15:00">15:00</option>
-                    <option value="16:00">16:00</option>
-                </select>
+    <label>Hora:</label>
+    <input type="time" name="hora" required><br><br>
 
-                <button type="submit">Confirmar Agendamento</button>
-            </form>
-
-            <a href="{{ url_for('index') }}" class="voltar">Voltar à lista</a>
-        </div>
-    </div>
-</body>
+    <button type="submit" class="btn">Salvar Agendamento</button>
+    <a href="{{ url_for('index') }}" class="btn btn-voltar">Voltar</a>
+</form>
+{% endblock %}

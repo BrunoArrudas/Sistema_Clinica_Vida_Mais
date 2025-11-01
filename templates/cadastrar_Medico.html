@@ -1,4 +1,7 @@
 <body>
+
+    {% extends "base.html" %}
+{% block content %}
     <div class="cadastrar-container">
         <div class="card cadastrar-card">
             <h1>Cadastrar Médico</h1>
@@ -20,4 +23,6 @@
             <a href="{{ url_for('index') }}" class="voltar">Voltar à lista</a>
         </div>
     </div>
+
+    {% endblock %}
 </body>

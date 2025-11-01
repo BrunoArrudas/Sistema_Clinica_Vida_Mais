@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Editar Paciente</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
+
 <body>
+
+    {% extends "base.html" %}
+    {% block content %}
     <div class="cadastrar-container">
         <div class="card cadastrar-card">
             <h1>Editar Paciente</h1>
@@ -23,6 +29,9 @@
             <a href="{{ url_for('index') }}" class="voltar">Voltar à lista</a>
         </div>
     </div>
+
+    {% endblock %}
 </body>
+
 
 </html>

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Médicos Cadastrados</h1>
+<a href="{{ url_for('cadastrar_medico') }}" class="btn" style="margin-bottom:20px;">Cadastrar novo médico</a>
+
+<div class="pacientes-container" style="display:flex; flex-wrap:wrap; gap:20px;">
+    {% for medico in medicos %}
+    <div class="card paciente-card" style="flex:1 1 250px; padding:20px; border-radius:10px; background-color:white; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s;">
+        <h3>{{ medico.nome }}</h3>
+        <p><strong>Especialidade:</strong> {{ medico.especialidade }}</p>
+        <p><strong>CRM:</strong> {{ medico.crm }}</p>
+        <p><strong>Telefone:</strong> {{ medico.telefone }}</p>
+        <div class="acoes" style="margin-top:10px;">
+            <a href="{{ url_for('excluir_medico', id=medico.id) }}" class="btn btn-voltar"
+               onclick="return confirm('Tem certeza que deseja excluir este médico?')">Excluir</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

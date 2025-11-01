@@ -1,169 +1,68 @@
-/* ===== Corpo da página ===== */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f8fa;
+    background-color: #f0f4f8;
     margin: 0;
     padding: 20px;
 }
 
-/* ===== Cards genéricos ===== */
-.card {
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    padding: 20px;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
+.container {
+    max-width: 1200px;
+    margin: auto;
 }
 
-/* Hover para todos os cards */
+/* Cards */
+.card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 }
 
-/* ===== Lista de pacientes ===== */
-.pacientes-container {
+/* Container para listas de cards */
+.cards-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    padding: 0;
-    margin: 0;
 }
 
-.paciente-card {
-    width: 250px;
-}
-
-/* Conteúdo dos cards de pacientes */
-.paciente-card h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 1.2em;
-}
-
-.paciente-card p {
-    margin: 5px 0;
-}
-
-/* Links de ação */
-.acoes {
-    margin-top: 10px;
-}
-
-.acoes a {
+/* Botões dentro dos cards */
+.card .acoes a {
     text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-right: 5px;
-    font-size: 0.9em;
-    transition: all 0.3s ease;
-}
-
-.acoes a.editar {
-    background-color: #4CAF50;
-    color: #fff;
-}
-
-.acoes a.editar:hover {
-    background-color: #45a049;
-}
-
-.acoes a.excluir {
-    background-color: #f44336;
-    color: #fff;
-}
-
-.acoes a.excluir:hover {
-    background-color: #d32f2f;
-}
-
-/* ===== Página de cadastro ===== */
-.cadastrar-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 80vh;
-    padding: 20px;
-}
-
-.cadastrar-card {
-    width: 100%;
-    max-width: 400px;
-}
-
-.cadastrar-card h1 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Inputs e labels do formulário */
-.cadastrar-card label {
-    display: block;
-    margin-bottom: 5px;
+    padding: 6px 12px;
+    background-color: #00b4d8;
+    color: white;
+    border-radius: 8px;
     font-weight: bold;
+    margin-right: 10px;
+    transition: transform 0.2s, background-color 0.2s;
 }
 
-.cadastrar-card input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
+.card .acoes a:hover {
+    background-color: #0096c7;
+    transform: translateY(-2px);
+}
+
+/* Botões gerais */
+.btn {
+    padding: 8px 15px;
+    background-color: #00b4d8;
+    color: white;
     border-radius: 8px;
-    box-sizing: border-box;
-    transition: border 0.3s ease;
-}
-
-.cadastrar-card input:focus {
-    border-color: #4CAF50;
-    outline: none;
-}
-
-/* Botão salvar */
-.cadastrar-card button {
-    width: 100%;
-    padding: 12px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.cadastrar-card button:hover {
-    background-color: #45a049;
-}
-
-/* Link voltar */
-.cadastrar-card .voltar {
-    display: block;
-    margin-top: 15px;
-    text-align: center;
     text-decoration: none;
-    color: #555;
-    transition: color 0.3s ease;
+    font-weight: bold;
+    transition: transform 0.2s, background-color 0.2s;
 }
 
-.cadastrar-card .voltar:hover {
-    color: #000;
-}
-
-
-/* Estilo para selects (para combinar com os inputs) */
-.cadastrar-card select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-sizing: border-box;
-    background-color: #fff;
-    transition: border 0.3s ease;
-}
-
-.cadastrar-card select:focus {
-    border-color: #4CAF50;
-    outline: none;
+.btn:hover {
+    background-color: #0096c7;
+    transform: translateY(-2px);
 }
