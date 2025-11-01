@@ -3,7 +3,6 @@
 
 <h1 style="margin-bottom:20px;">Pacientes do Sistema Clínica Vida+</h1>
 
-<!-- Estatísticas -->
 <div class="estatisticas">
     <div class="card estat-card" style="background-color:#0077b6; color:white;">
         <strong>Total de pacientes</strong>
@@ -29,10 +28,8 @@
     <button type="submit" class="btn">Buscar</button>
 </form>
 
-<!-- Botão de cadastro -->
 <a href="{{ url_for('cadastrar') }}" class="btn">Cadastrar novo paciente</a>
 
-<!-- Lista de pacientes -->
 <div class="pacientes-container">
     {% for paciente in pacientes %}
     <div class="card paciente-card">

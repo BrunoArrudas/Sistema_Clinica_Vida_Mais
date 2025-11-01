@@ -5,14 +5,9 @@ from sqlalchemy import func
 
 app = Flask(__name__)
 
-# Configuração do banco SQLite
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///clinica.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-
-# =====================
-# 📘 MODELOS DO BANCO
-# =====================
 
 class Paciente(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -45,23 +40,17 @@ class Atendimento(db.Model):
     descricao = db.Column(db.Text, nullable=False)
     data = db.Column(db.DateTime, default=datetime.now)
 
-# =====================
-# 📍 ROTAS PRINCIPAIS
-# =====================
-
 from flask import request
 
 @app.route('/')
 def index():
-    busca = request.args.get('busca')  # Captura o parâmetro 'busca' da URL
+    busca = request.args.get('busca')  
 
-    # Se houver busca, filtra pacientes pelo nome
     if busca:
         pacientes = Paciente.query.filter(Paciente.nome.ilike(f'%{busca}%')).all()
     else:
         pacientes = Paciente.query.all()
 
-    # Estatísticas
     total_pacientes = db.session.query(func.count(Paciente.id)).scalar()
     idade_media = db.session.query(func.avg(Paciente.idade)).scalar()
     if idade_media:
@@ -113,10 +102,6 @@ def excluir(id):
     db.session.commit()
     return redirect(url_for('index'))
 
-# =====================
-# Rotas Médicos
-# =====================
-
 @app.route('/cadastrar_medico', methods=['GET', 'POST'])
 def cadastrar_medico():
     if request.method == 'POST':
@@ -143,10 +128,6 @@ def excluir_medico(id):
     db.session.delete(medico)
     db.session.commit()
     return redirect(url_for('lista_medicos'))
-
-# =====================
-# Agendamentos
-# =====================
 
 @app.route('/agendar', methods=['GET', 'POST'])
 def agendar():
@@ -180,10 +161,6 @@ def agendamentos():
     agendamentos = Agendamento.query.order_by(Agendamento.data.desc()).all()
     return render_template('agendamentos.html', agendamentos=agendamentos)
 
-# =====================
-# Atendimentos
-# =====================
-
 @app.route('/atendimentos', methods=['GET', 'POST'])
 def atendimentos():
     pacientes = Paciente.query.all()
@@ -206,9 +183,6 @@ def atendimentos():
     atendimentos = Atendimento.query.order_by(Atendimento.data.desc()).all()
     return render_template('atendimentos.html', pacientes=pacientes, atendimentos=atendimentos)
 
-# =====================
-# 🚀 EXECUÇÃO
-# =====================
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

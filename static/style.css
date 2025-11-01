@@ -1,6 +1,4 @@
-/* =======================
-   ESTILO GLOBAL
-======================= */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f4f8;
@@ -13,9 +11,7 @@ body {
     margin: auto;
 }
 
-/* =======================
-   MENU / NAVBAR
-======================= */
+/* Estilização da barra de navegação */
 nav {
     display: flex;
     justify-content: space-between;
@@ -46,9 +42,7 @@ nav a:hover {
     transform: translateY(-3px);
 }
 
-/* =======================
-   RODAPÉ
-======================= */
+/* Footer */
 footer {
     background-color: #0077b6;
     color: white;
@@ -68,9 +62,7 @@ footer a:hover {
     text-decoration: underline;
 }
 
-/* =======================
-   CARDS
-======================= */
+/* Estilização dos Cards geral*/
 .card {
     background-color: white;
     border-radius: 10px;
@@ -93,7 +85,7 @@ footer a:hover {
     gap: 20px;
 }
 
-/* Cards de estatísticas */
+/* Estilização dos Cards de estatísticas */
 .estat-card {
     flex: 1;
     color: white;
@@ -108,9 +100,7 @@ footer a:hover {
     transform: translateY(-5px);
 }
 
-/* =======================
-   BOTÕES
-======================= */
+/* Estilização dos Botoes*/
 .btn {
     display: inline-block;
     padding: 8px 15px;
@@ -127,7 +117,6 @@ footer a:hover {
     transform: translateY(-2px);
 }
 
-/* Botões dentro de cards (ações) */
 .card .acoes a {
     text-decoration: none;
     padding: 6px 12px;
@@ -144,7 +133,6 @@ footer a:hover {
     transform: translateY(-2px);
 }
 
-/* Botão voltar dentro de formulários */
 .btn-voltar {
     background-color: #48cae4;
 }
@@ -153,9 +141,7 @@ footer a:hover {
     background-color: #0096c7;
 }
 
-/* =======================
-   FORMULÁRIOS
-======================= */
+/* Estilização dos formularios*/
 form {
     display: flex;
     flex-direction: column;
@@ -180,9 +166,6 @@ textarea {
     resize: vertical;
 }
 
-/* =======================
-   CONTAINERS ESPECÍFICOS
-======================= */
 .cadastrar-container {
     display: flex;
     justify-content: center;
@@ -194,7 +177,7 @@ textarea {
     max-width: 500px;
 }
 
-/* Lista de pacientes e médicos */
+/* Estilização das cards e containers de medicos e pacientes */
 .pacientes-container,
 .cards-container,
 .historico-container {
@@ -203,12 +186,10 @@ textarea {
     gap: 20px;
 }
 
-/* Cards de histórico */
 .historico-card .descricao {
     white-space: pre-wrap;
 }
 
-/* Hover suave para todos os cards */
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
