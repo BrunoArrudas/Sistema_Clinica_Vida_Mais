@@ -49,12 +49,20 @@ class Atendimento(db.Model):
 # 📍 ROTAS PRINCIPAIS
 # =====================
 
+from flask import request
+
 @app.route('/')
 def index():
-    pacientes = Paciente.query.all()
+    busca = request.args.get('busca')  # Captura o parâmetro 'busca' da URL
+
+    # Se houver busca, filtra pacientes pelo nome
+    if busca:
+        pacientes = Paciente.query.filter(Paciente.nome.ilike(f'%{busca}%')).all()
+    else:
+        pacientes = Paciente.query.all()
 
     # Estatísticas
-    total_pacientes = db.session.query(func.count(Paciente.id)).scalar() or 0
+    total_pacientes = db.session.query(func.count(Paciente.id)).scalar()
     idade_media = db.session.query(func.avg(Paciente.idade)).scalar()
     if idade_media:
         idade_media = round(idade_media, 1)
@@ -68,8 +76,10 @@ def index():
         total_pacientes=total_pacientes,
         idade_media=idade_media,
         paciente_mais_novo=paciente_mais_novo,
-        paciente_mais_velho=paciente_mais_velho
+        paciente_mais_velho=paciente_mais_velho,
+        busca=busca
     )
+
 
 @app.route('/cadastrar', methods=['GET', 'POST'])
 def cadastrar():

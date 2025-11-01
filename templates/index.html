@@ -23,6 +23,12 @@
     </div>
 </div>
 
+<form method="GET" style="margin-bottom:20px;">
+    <input type="text" name="busca" placeholder="Buscar paciente pelo nome" value="{{ busca or '' }}"
+        style="padding:8px; border-radius:8px; border:1px solid #ccc; margin-top: 20px;">
+    <button type="submit" class="btn">Buscar</button>
+</form>
+
 <!-- Botão de cadastro -->
 <a href="{{ url_for('cadastrar') }}" class="btn">Cadastrar novo paciente</a>
 
@@ -36,7 +42,7 @@
         <div class="acoes">
             <a href="{{ url_for('editar', id=paciente.id) }}" class="btn">Editar</a>
             <a href="{{ url_for('excluir', id=paciente.id) }}" class="btn btn-voltar"
-               onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
         </div>
     </div>
     {% endfor %}
