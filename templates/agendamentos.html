@@ -1,0 +1,32 @@
+<body>
+
+    {% extends "base.html" %}
+    {% block content %}
+    <h1>Lista de Agendamentos</h1>
+
+    <div class="pacientes-container">
+        {% for agendamento in agendamentos %}
+        <div class="card paciente-card">
+            <h3>{{ agendamento.paciente.nome }}</h3>
+            <p><strong>Médico:</strong> {{ agendamento.medico.nome }} ({{ agendamento.medico.especialidade }})</p>
+            <p><strong>Tipo:</strong> {{ agendamento.tipo }}</p>
+            <p><strong>Data:</strong> {{ agendamento.data.strftime('%d/%m/%Y') }}</p>
+            <p><strong>Horário:</strong> {{ agendamento.hora }}</p>
+
+            <div class="acoes">
+                <td>{{ agendamento.tipo }}</td>
+                <td>{{ agendamento.data }}</td>
+                <td>{{ agendamento.hora }}</td>
+                <td>{{ agendamento.paciente.nome }}</td>
+                <td>{{ agendamento.medico.nome }}</td>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <br>
+    <a href="{{ url_for('agendar') }}" class="voltar">Agendar nova consulta/exame</a>
+    <br><br>
+    <a href="{{ url_for('index') }}" class="voltar">Voltar à página inicial</a>
+    {% endblock %}
+</body>
