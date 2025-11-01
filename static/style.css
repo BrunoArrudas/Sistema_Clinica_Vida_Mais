@@ -149,3 +149,21 @@ body {
 .cadastrar-card .voltar:hover {
     color: #000;
 }
+
+
+/* Estilo para selects (para combinar com os inputs) */
+.cadastrar-card select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: #fff;
+    transition: border 0.3s ease;
+}
+
+.cadastrar-card select:focus {
+    border-color: #4CAF50;
+    outline: none;
+}

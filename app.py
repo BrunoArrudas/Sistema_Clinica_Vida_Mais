@@ -61,6 +61,29 @@ def cadastrar_medico():
         return redirect(url_for('index'))
     return render_template('cadastrar_medico.html')
 
+@app.route('/agendar', methods=['GET', 'POST'])
+def agendar():
+    pacientes = Paciente.query.all()
+    medicos = Medico.query.all()
+
+    if request.method == 'POST':
+        paciente_id = request.form['paciente']
+        medico_id = request.form['medico']
+        tipo = request.form['tipo']
+        data = request.form['data']
+        hora = request.form['hora']
+        
+        # Aqui você salva o agendamento no banco
+        # Exemplo:
+        # novo = Agendamento(paciente_id=paciente_id, medico_id=medico_id, tipo=tipo, data=data, hora=hora)
+        # db.session.add(novo)
+        # db.session.commit()
+        
+        return redirect(url_for('index'))
+
+    return render_template('agendar.html', pacientes=pacientes, medicos=medicos)
+
+
 # Rota de exclusão
 @app.route('/excluir/<int:id>')
 def excluir(id):
