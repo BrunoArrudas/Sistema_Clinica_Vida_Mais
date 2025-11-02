@@ -14,8 +14,21 @@ class Paciente(db.Model):
     nome = db.Column(db.String(100), nullable=False)
     idade = db.Column(db.Integer, nullable=False)
     telefone = db.Column(db.String(20), nullable=False)
+    rg = db.Column(db.String(20))
+    cpf = db.Column(db.String(20))
+    pagamentos_em_dia = db.Column(db.Boolean, default=True)
     atendimentos = db.relationship('Atendimento', backref='paciente', lazy=True, cascade="all, delete")
     agendamentos = db.relationship('Agendamento', backref='paciente', lazy=True, cascade="all, delete")
+    pagamentos = db.relationship('Pagamento', backref='paciente', lazy=True, cascade="all, delete")
+
+class Pagamento(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    paciente_id = db.Column(db.Integer, db.ForeignKey('paciente.id'), nullable=False)
+    descricao = db.Column(db.String(100), nullable=False)
+    valor = db.Column(db.Float, nullable=False)
+    status = db.Column(db.String(20), default='pendente')  # 'pago' ou 'pendente'
+    data = db.Column(db.Date, default=datetime.utcnow)
+
 
 class Medico(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,6 +36,7 @@ class Medico(db.Model):
     especialidade = db.Column(db.String(100), nullable=False)
     crm = db.Column(db.String(20), nullable=False)
     telefone = db.Column(db.String(20))
+    disponivel = db.Column(db.Boolean, default=True)
     agendamentos = db.relationship('Agendamento', backref='medico', lazy=True, cascade="all, delete")
 
 class Agendamento(db.Model):
@@ -76,13 +90,24 @@ def cadastrar():
         nome = request.form['nome']
         idade = request.form['idade']
         telefone = request.form['telefone']
+        rg = request.form['rg']
+        cpf = request.form['cpf']
+        pagamentos_em_dia = True if request.form.get('pagamentos_em_dia') == 'on' else False
 
-        novo_paciente = Paciente(nome=nome, idade=idade, telefone=telefone)
+        novo_paciente = Paciente(
+            nome=nome, 
+            idade=idade, 
+            telefone=telefone,
+            rg=rg,
+            cpf=cpf,
+            pagamentos_em_dia=pagamentos_em_dia
+        )
         db.session.add(novo_paciente)
         db.session.commit()
         return redirect(url_for('index'))
 
     return render_template('cadastrar.html')
+
 
 @app.route('/editar/<int:id>', methods=['GET', 'POST'])
 def editar(id):
@@ -91,7 +116,9 @@ def editar(id):
         paciente.nome = request.form['nome']
         paciente.idade = request.form['idade']
         paciente.telefone = request.form['telefone']
-        db.session.commit()
+        paciente.rg = request.form['rg']
+        paciente.cpf = request.form['cpf']
+        paciente.pagamentos_em_dia = True if request.form.get('pagamentos_em_dia') == 'on' else False
         return redirect(url_for('index'))
     return render_template('editar.html', paciente=paciente)
 
@@ -161,6 +188,50 @@ def agendamentos():
     agendamentos = Agendamento.query.order_by(Agendamento.data.desc()).all()
     return render_template('agendamentos.html', agendamentos=agendamentos)
 
+from datetime import date
+
+@app.route('/controle_acesso', methods=['GET', 'POST'])
+def controle_acesso():
+    pacientes = Paciente.query.all()
+    medicos = Medico.query.filter_by(disponivel=True).all()  # só médicos disponíveis
+
+    resultados = []
+
+    for paciente in pacientes:
+        pode_ser_atendido = True
+        motivos = []
+
+        # 1️⃣ Verificar se o paciente tem agendamento
+        agendamento = Agendamento.query.filter_by(paciente_id=paciente.id).first()
+        if not agendamento:
+            pode_ser_atendido = False
+            motivos.append("Sem agendamento marcado")
+
+        # 2️⃣ Verificar documentos
+        if not paciente.rg or not paciente.cpf:
+            pode_ser_atendido = False
+            motivos.append("Documentos incompletos")
+
+        # 3️⃣ Verificar pagamento
+        if not paciente.pagamentos_em_dia:
+            pode_ser_atendido = False
+            motivos.append("Pagamentos pendentes")
+
+        # 4️⃣ Verificar médico disponível
+        if not medicos:
+            pode_ser_atendido = False
+            motivos.append("Nenhum médico disponível")
+
+        resultados.append({
+            'paciente': paciente,
+            'pode_ser_atendido': pode_ser_atendido,
+            'motivos': motivos
+        })
+
+    return render_template('controle_acesso.html', resultados=resultados)
+
+
+
 @app.route('/atendimentos', methods=['GET', 'POST'])
 def atendimentos():
     pacientes = Paciente.query.all()
@@ -185,5 +256,8 @@ def atendimentos():
 
 if __name__ == '__main__':
     with app.app_context():
+        # Deletar todas as tabelas antigas
+        db.drop_all()
+        # Criar tabelas novamente
         db.create_all()
     app.run(debug=True)

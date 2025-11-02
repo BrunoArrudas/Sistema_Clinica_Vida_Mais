@@ -14,6 +14,16 @@
             <label for="telefone">Telefone:</label>
             <input type="text" id="telefone" name="telefone" required>
 
+            <label for="rg">RG:</label>
+            <input type="text" id="rg" name="rg" required>
+
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" name="cpf" required>
+
+            <label for="pagamentos_em_dia">Pagamentos em dia:</label>
+            <input type="checkbox" id="pagamentos_em_dia" name="pagamentos_em_dia" checked>
+
+
             <button type="submit" class="btn">Salvar</button>
         </form>
         <a href="{{ url_for('index') }}" class="btn btn-voltar">Voltar à lista</a>

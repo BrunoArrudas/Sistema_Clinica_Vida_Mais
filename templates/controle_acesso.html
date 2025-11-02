@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Controle de Acesso - Atendimento</h1>
+
+<div class="cards-container" style="gap:20px; flex-wrap:wrap;">
+    {% for r in resultados %}
+    <div class="card paciente-card" style="flex:1 1 300px; background-color: {% if r.pode_ser_atendido %}#00b4d8{% else %}#f94144{% endif %}; color:white;">
+        <h3>{{ r.paciente.nome }}</h3>
+        <p><strong>Idade:</strong> {{ r.paciente.idade }} anos</p>
+        <p><strong>Telefone:</strong> {{ r.paciente.telefone }}</p>
+        <p><strong>Status:</strong> {% if r.pode_ser_atendido %}Liberado{% else %}Bloqueado{% endif %}</p>
+        {% if r.motivos %}
+        <p><strong>Motivos:</strong></p>
+        <ul>
+            {% for m in r.motivos %}
+            <li>{{ m }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
